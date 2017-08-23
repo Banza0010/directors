@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DirectorsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DirectorName1">
+          <Key>
+            <PropertyRef Name="DirectorID" />
+          </Key>
+          <Property Name="DirectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Initials" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearOfBirth" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grouping" Type="int" Nullable="false" />
+          <Property Name="Profile" Type="text" />
+          <Property Name="UpdateDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DirectorQualification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DirectorID" Type="int" Nullable="false" />
+          <Property Name="QualificationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grouping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="GroupType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Qualifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Qualification" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_DirectorName1_Grouping">
+          <End Role="Grouping" Type="Self.Grouping" Multiplicity="1" />
+          <End Role="DirectorName1" Type="Self.DirectorName1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grouping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DirectorName1">
+              <PropertyRef Name="Grouping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectorQualification_DirectorName1">
+          <End Role="DirectorName1" Type="Self.DirectorName1" Multiplicity="1" />
+          <End Role="DirectorQualification" Type="Self.DirectorQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DirectorName1">
+              <PropertyRef Name="DirectorID" />
+            </Principal>
+            <Dependent Role="DirectorQualification">
+              <PropertyRef Name="DirectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectorQualification_Qualifications">
+          <End Role="Qualifications" Type="Self.Qualifications" Multiplicity="1" />
+          <End Role="DirectorQualification" Type="Self.DirectorQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualifications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DirectorQualification">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DirectorsDBModelStoreContainer">
+          <EntitySet Name="DirectorName1" EntityType="Self.DirectorName1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DirectorQualification" EntityType="Self.DirectorQualification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grouping" EntityType="Self.Grouping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Qualifications" EntityType="Self.Qualifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DirectorName1_Grouping" Association="Self.FK_DirectorName1_Grouping">
+            <End Role="Grouping" EntitySet="Grouping" />
+            <End Role="DirectorName1" EntitySet="DirectorName1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectorQualification_DirectorName1" Association="Self.FK_DirectorQualification_DirectorName1">
+            <End Role="DirectorName1" EntitySet="DirectorName1" />
+            <End Role="DirectorQualification" EntitySet="DirectorQualification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectorQualification_Qualifications" Association="Self.FK_DirectorQualification_Qualifications">
+            <End Role="Qualifications" EntitySet="Qualifications" />
+            <End Role="DirectorQualification" EntitySet="DirectorQualification" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DirectorsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DirectorName1">
+          <Key>
+            <PropertyRef Name="DirectorID" />
+          </Key>
+          <Property Name="DirectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Initials" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearOfBirth" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Grouping" Type="Int32" Nullable="false" />
+          <Property Name="Profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Grouping1" Relationship="Self.FK_DirectorName1_Grouping" FromRole="DirectorName1" ToRole="Grouping" />
+          <NavigationProperty Name="DirectorQualifications" Relationship="DirectorsDBModel.FK_DirectorQualification_DirectorName1" FromRole="DirectorName1" ToRole="DirectorQualification" />
+        </EntityType>
+        <EntityType Name="Grouping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="GroupType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DirectorName1" Relationship="Self.FK_DirectorName1_Grouping" FromRole="Grouping" ToRole="DirectorName1" />
+        </EntityType>
+        <EntityType Name="Qualification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Qualification1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DirectorQualifications" Relationship="DirectorsDBModel.FK_DirectorQualification_Qualifications" FromRole="Qualification" ToRole="DirectorQualification" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_DirectorName1_Grouping">
+          <End Role="Grouping" Type="Self.Grouping" Multiplicity="1" />
+          <End Role="DirectorName1" Type="Self.DirectorName1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grouping">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DirectorName1">
+              <PropertyRef Name="Grouping" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DirectorsDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DirectorName1" EntityType="Self.DirectorName1" />
+          <EntitySet Name="Groupings" EntityType="Self.Grouping" />
+          <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_DirectorName1_Grouping" Association="Self.FK_DirectorName1_Grouping">
+            <End Role="Grouping" EntitySet="Groupings" />
+            <End Role="DirectorName1" EntitySet="DirectorName1" />
+          </AssociationSet>
+          <EntitySet Name="DirectorQualifications" EntityType="DirectorsDBModel.DirectorQualification" />
+          <AssociationSet Name="FK_DirectorQualification_DirectorName1" Association="DirectorsDBModel.FK_DirectorQualification_DirectorName1">
+            <End Role="DirectorName1" EntitySet="DirectorName1" />
+            <End Role="DirectorQualification" EntitySet="DirectorQualifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectorQualification_Qualifications" Association="DirectorsDBModel.FK_DirectorQualification_Qualifications">
+            <End Role="Qualification" EntitySet="Qualifications" />
+            <End Role="DirectorQualification" EntitySet="DirectorQualifications" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DirectorQualification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DirectorID" Type="Int32" Nullable="false" />
+          <Property Name="QualificationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DirectorName1" Relationship="DirectorsDBModel.FK_DirectorQualification_DirectorName1" FromRole="DirectorQualification" ToRole="DirectorName1" />
+          <NavigationProperty Name="Qualification" Relationship="DirectorsDBModel.FK_DirectorQualification_Qualifications" FromRole="DirectorQualification" ToRole="Qualification" />
+        </EntityType>
+        <Association Name="FK_DirectorQualification_DirectorName1">
+          <End Type="DirectorsDBModel.DirectorName1" Role="DirectorName1" Multiplicity="1" />
+          <End Type="DirectorsDBModel.DirectorQualification" Role="DirectorQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DirectorName1">
+              <PropertyRef Name="DirectorID" />
+            </Principal>
+            <Dependent Role="DirectorQualification">
+              <PropertyRef Name="DirectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectorQualification_Qualifications">
+          <End Type="DirectorsDBModel.Qualification" Role="Qualification" Multiplicity="1" />
+          <End Type="DirectorsDBModel.DirectorQualification" Role="DirectorQualification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Qualification">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DirectorQualification">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DirectorsDBModelStoreContainer" CdmEntityContainer="DirectorsDBContext">
+          <EntitySetMapping Name="DirectorName1">
+            <EntityTypeMapping TypeName="DirectorsDBModel.DirectorName1">
+              <MappingFragment StoreEntitySet="DirectorName1">
+                <ScalarProperty Name="DirectorID" ColumnName="DirectorID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Initials" ColumnName="Initials" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="YearOfBirth" ColumnName="YearOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Grouping" ColumnName="Grouping" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groupings">
+            <EntityTypeMapping TypeName="DirectorsDBModel.Grouping">
+              <MappingFragment StoreEntitySet="Grouping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualifications">
+            <EntityTypeMapping TypeName="DirectorsDBModel.Qualification">
+              <MappingFragment StoreEntitySet="Qualifications">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Qualification1" ColumnName="Qualification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DirectorsDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DirectorQualifications">
+            <EntityTypeMapping TypeName="DirectorsDBModel.DirectorQualification">
+              <MappingFragment StoreEntitySet="DirectorQualification">
+                <ScalarProperty Name="QualificationID" ColumnName="QualificationID" />
+                <ScalarProperty Name="DirectorID" ColumnName="DirectorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

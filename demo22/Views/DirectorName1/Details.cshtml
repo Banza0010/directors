@@ -1,0 +1,122 @@
+﻿@model demo22.Models.DirectorName1
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="col-lg-12 panel panel-info" >
+
+    <div>
+
+        <div class="panel-heading" >
+            <h4>Details | @Html.DisplayFor(model => model.Surname) @Html.DisplayFor(model => model.FirstName) </h4>
+        
+            
+        </div>
+
+        <div class="panel-body" style="background-color:#f9fafc">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Grouping1.GroupType, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Grouping1.GroupType, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    </div>
+                </div>
+            </div>
+
+            <hr style="height:1px;border:none;color:gray;background-color:gray;" />
+            
+            <div class="row col-lg-12">
+                <p><b>Qualification(s) :</b></p>
+
+                <div class="well well-sm">
+                    @Html.Raw(ViewBag.Qualifactions)
+                </div>
+
+                @*@Html.Partial("_PartialView")*@
+                <hr style="height:1px;border:none;color:gray;background-color:gray;" />
+            </div>
+
+            @*<div id="AddAlert" class="alert alert-danger alert-dismissible" role="alert" style="height:50px">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <p class="alert-heading" style="text-align:right">Note : Qualifications data here!!</p>
+
+            </div>*@
+
+            <p><b>Profile:</b></p>
+            <div class="row col-lg-12">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Profile, htmlAttributes: new { @class = "control-label " })*@
+                        @Html.TextAreaFor(model => model.Profile, 5, 1000, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-lg-12">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        Last updated : @Html.DisplayFor(model => model.UpdateDate)
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="col-lg-12" style="background-color:#f9fafc">
+
+                <input class="btn btn-default" type="submit" value="Back" onclick="location.href='@Url.Action("Index", "DirectorName1")'" style="width:100px " />
+                @Html.ActionLink("Edit", "Edit", new { id = Model.DirectorID }, new { @class = "btn btn-primary", @style = "width:100px" })
+            </div>
+        </div>
+        <div class="col-lg-0"></div>
+
+    </div>
+
+
+</div>
+

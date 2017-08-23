@@ -1,0 +1,213 @@
+﻿@model demo22.Models.DirectorName1
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@*<div id="AddAlert" class="alert alert-info alert-dismissible" role="alert" style="height:50px; color:black; background-color:#f2ec85">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="alert-heading" style="text-align:center">Click on field to change</p>
+
+</div>*@
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4>Edit | @Html.DisplayFor(model => model.Surname) @Html.DisplayFor(model => model.FirstName) </h4>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-lg-12" style="background-color:#f9fafc">
+                <div class="form">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.DirectorID)
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label " })
+                                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label " })
+                                @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                @*@Html.DropDownList(model.Title, new List<SelectListItem>
+                                {
+                                 new SelectListItem { Text = "Mr", Value = "Mr"},
+                                 new SelectListItem { Text = "Mrs", Value = "Mrs"},
+                                 new SelectListItem { Text = "Ms", Value = "Ms"},
+                                 new SelectListItem { Text = "Dr", Value = "Dr."},
+                                 new SelectListItem { Text = "Prof", Value = "Prof."},
+                                 new SelectListItem { Text = "Miss", Value = "Miss"},
+                                 new SelectListItem { Text = "Sir", Value = "Sir"}
+                                 }, new { @class = "form-control"})*@
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label " })
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group" style="width:180px">
+                                @Html.LabelFor(model => model.YearOfBirth, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.YearOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group" style="width:180px">
+                                @Html.LabelFor(model => model.Grouping, "Grouping", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("Grouping", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Grouping, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group" style="width:180px">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+                                @*@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownList("Gender", new List<SelectListItem>
+                                 {
+                                  new SelectListItem { Text = "Male", Value = "Male"},
+                                  new SelectListItem { Text = "Female", Value = "Female"},
+                                  }, new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr style="height:1px;border:none;color:gray;background-color:gray;" />
+                <div class="row col-lg-12">
+                    <p><b>Qualification(s) :</b></p>
+
+                    @*<div id="AddAlert" class="alert alert-danger alert-dismissible" role="alert" style="height:50px">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <p class="alert-heading" style="text-align:right">Note : Qualifications data here!!</p>
+
+                    </div>*@
+                    <p style="color:red">note: Fix add </p>
+
+                    <div class="well well-sm">
+                        @Html.Raw(ViewBag.Qualifactions)
+                    </div>
+
+                    <hr style="height:1px;border:none;color:gray;background-color:gray;" />
+                </div>
+               
+
+                <p><b>Profile:</b></p>
+                <div class="row col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.Profile, htmlAttributes: new { @class = "control-label " })*@
+                            @Html.TextAreaFor(model => model.Profile, 5, 400, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mark> Today -  @Html.Label(DateTime.Now.ToShortDateString()) </mark>
+
+</div>
+                    </div>
+                </div>
+                <hr>
+                <div sstyle="background-color:#f9fafc">
+                    <input class="btn btn-default" type="submit" value="Back" onclick="location.href='@Url.Action("Details", "DirectorName1")'" style="width:100px" />
+
+                    <input id="submitButton"
+                           type="submit"
+                           value="Save"
+                           class="btn btn-primary"
+                           style="width:100px"
+                           onclick="return  DisplayProgressMessage(this, 'Saving..');"> 
+
+                    @*<input type="submit" value="Save" class="btn btn-primary" style="width:100px" />*@
+
+                    @*@Html.ActionLink("Delete", "Delete", new { id = Model.DirectorID }, new { @class = "btn btn-danger", @style = "width:100px" })*@
+                    <button value="Delete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style = "width:100px">Delete</button>
+
+                </div>
+            </div>
+
+
+            <!--Delete Modal-->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-sm" style="width:500px; height:500px; padding-top:200px">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:black">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Confirm</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><b>Are you sure you want to delete: @Html.DisplayFor(model => model.Surname) @Html.DisplayFor(model => model.FirstName) ?</b></p>
+                            <p style="color:red">note: fix delete!!!! </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>
+                            <input type="submit" value="Delete" class="btn btn-danger" style="width:100px" />
+                            @*@Html.ActionLink("Delete", "Delete", new { id = Model.DirectorID }, new { @class = "btn btn-primary", @style = "color:white", @type ="submit", @value="Delete" })*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="submit-progress hidden">
+    <label>Updating Director information..</label>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function DisplayProgressMessage(ctl, msg) {
+    $(ctl).prop("disabled", false);
+    $(ctl).text(msg);
+    return true;
+  }
+
+  function DisplayProgressMessage(ctl, msg) {
+      $(ctl).prop("disabled", false).text(msg);
+      $(".submit-progress").removeClass("hidden");
+      return true;
+  }
+
+</script>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
